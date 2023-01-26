@@ -68,6 +68,10 @@ if [[ ${GITLAB_RUNNER_CONCURRENT} ]]; then
   sed -i 's/concurrent = 1/concurrent = '${GITLAB_RUNNER_CONCURRENT}'/g' /etc/gitlab-runner/config.toml
 fi 
 
+if [[ ${RUNNER_DOCKER_PRIVILEGED} ]]; then
+  sed -i 's/privileged = false/privileged = '${RUNNER_DOCKER_PRIVILEGED}'/g' /etc/gitlab-runner/config.toml
+fi
+
 # assign runner token
 TOKEN=$(cat /etc/gitlab-runner/config.toml | grep token | awk '{print $3}' | tr -d '"')
 
